@@ -1,0 +1,4 @@
+interface:
+  display_name: "Renit Local TestFlight Release"
+  short_description: "Archive and upload Renit QA builds"
+  default_prompt: "Use $renit-local-testflight-release to prepare a locally archived QA build for TestFlight."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Renit Feature Delivery"
+  short_description: "Implement focused Renit changes"
+  default_prompt: "Use $renit-feature-delivery to implement this scoped Renit change."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Renit Release Preflight"
+  short_description: "Gate Renit releases with evidence"
+  default_prompt: "Use $renit-release-preflight to assess readiness without releasing."

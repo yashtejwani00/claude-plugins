@@ -1,0 +1,4 @@
+interface:
+  display_name: "Renit Push Diagnostics"
+  short_description: "Trace QA push delivery failures"
+  default_prompt: "Use $renit-push-diagnostics to diagnose this Renit QA push-notification failure."

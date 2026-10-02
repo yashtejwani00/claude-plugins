@@ -1,0 +1,4 @@
+interface:
+  display_name: "Renit QA Bootstrap"
+  short_description: "Validate and start Renit QA"
+  default_prompt: "Use $renit-dev-bootstrap to validate the Renit QA device setup."

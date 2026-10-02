@@ -1,0 +1,4 @@
+interface:
+  display_name: "Renit Quality Gate"
+  short_description: "Independently review Renit changes"
+  default_prompt: "Use $renit-quality-gate to review this scoped Renit diff and its QA evidence."

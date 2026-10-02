@@ -1,0 +1,7 @@
+{
+  "name": "yash-plugins",
+  "owner": { "name": "Yashwant Tejwani" },
+  "plugins": [
+    { "name": "renit-agentic-dev", "source": "./plugins/renit-agentic-dev", "description": "Renit RN app: QA-only delivery, quality gate, device QA, release preflight, TestFlight skills" }
+  ]
+}

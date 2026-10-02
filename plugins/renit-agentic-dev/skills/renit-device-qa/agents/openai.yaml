@@ -1,0 +1,4 @@
+interface:
+  display_name: "Renit Device QA"
+  short_description: "Run controlled QA device flows"
+  default_prompt: "Use $renit-device-qa to verify this QA flow on the selected device."
