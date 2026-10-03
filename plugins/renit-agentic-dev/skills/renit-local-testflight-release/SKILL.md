@@ -10,7 +10,7 @@ description: Create and upload a QA-configured Renit iOS archive to TestFlight u
 1. Require a current `renit-release-preflight` handoff with no unresolved blocking gate.
 2. Confirm the user explicitly approves the next external action. Ask again immediately before importing/trusting a certificate, changing signing, creating an archive, uploading, declaring export compliance, assigning testers, or submitting Beta App Review.
 3. Use only `EXPO_PUBLIC_APP_ENV=QA` and `EXPO_PUBLIC_QA_API_HOST=qa-api.toratora.site`. Do not use EAS for this workflow.
-4. Run `scripts/inspect-ios-release.sh` before archiving. Stop on a block; never guess or repair signing without approval.
+4. Run `plugins/renit-agentic-dev/skills/renit-local-testflight-release/scripts/inspect-ios-release.sh` before archiving. Stop on a block; never guess or repair signing without approval. The approved archive helper is `plugins/renit-agentic-dev/skills/renit-local-testflight-release/scripts/archive-ios-qa.sh`.
 
 ## Local archive and upload
 

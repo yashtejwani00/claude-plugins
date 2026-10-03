@@ -5,7 +5,7 @@ description: Independently review a scoped Renit React Native diff and its verif
 
 # Renit Quality Gate
 
-1. Read `AGENTS.md`, the delivery handoff, and only the scoped diff. Preserve unrelated working-tree changes.
+1. Read `CLAUDE.md`, the delivery handoff, and only the scoped diff. Preserve unrelated working-tree changes.
 2. Trace the changed user flow enough to verify ownership across navigation, context, API hook, screen, component, and native configuration where relevant.
 3. Check focused correctness risks: typed navigation/route parameters, React Query invalidation, axios/auth reuse, error states, and regression risk.
 4. For configuration-impacting files, compare the resolved QA runtime path, bundle/package identity, Firebase resource, Google Sign-In configuration, entitlement, version/build, and ignore rules. Never print credentials or key material.

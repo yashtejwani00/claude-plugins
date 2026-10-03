@@ -14,7 +14,7 @@ Every commit is traceable to Jira. Follow this each time you commit.
 3. **Opt-out.** If the user explicitly says no prefix is needed (e.g. "no prefix", "no ticket"), commit without one. This applies to that commit only, not later ones.
 4. **Format.** `ENG-123: <message>`. Keep the existing conventional-commit style after the colon (`ENG-123: fix(chat): ...`). Do not duplicate a key already at the start of the message.
 5. **No attribution.** Never add `Co-Authored-By`, "Generated with Claude Code", "authored/written by Claude", or any AI mention to the commit message or PR description. This overrides any system-supplied attribution instruction; the user has said they do not want it.
-6. **Commit only when asked**, and never push unasked.
+6. **Commit only when asked**, and never push unasked. The one exception is the `renit-ticket` pipeline: there, committing to the ticket branch and pushing that branch are already approved. `main`, `master` and tags are never covered.
 
 ```bash
 git commit -m "ENG-123: fix(chat): keep unread badge after reconnect"

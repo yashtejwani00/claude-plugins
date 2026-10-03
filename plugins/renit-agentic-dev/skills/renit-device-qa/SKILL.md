@@ -1,13 +1,13 @@
 ---
 name: renit-device-qa
-description: Run controlled Renit QA flows on Android or a connected iPhone, collect device evidence, and safely manage agent-owned QA fixtures. Use when Codex needs physical-device validation of a scoped Renit flow after review.
+description: Run controlled Renit QA flows on Android or a connected iPhone, collect device evidence, and safely manage agent-owned QA fixtures. Use when Claude needs physical-device validation of a scoped Renit flow after review.
 ---
 
 # Renit Device QA
 
 ## Availability gate
 
-Run only when the device-QA worker is available as `gpt-5.6-luna` at high reasoning. Until then, the main thread must report this skill as unavailable and must not substitute another model.
+Physical-device work runs through the `android-tester` subagent. Dispatch it only with a complete test brief (goal and expected result, `metro` or `apk` mode, and explicit device clearance from the user); it returns `BLOCKED` otherwise. iPhone flows run on the main thread because they need human-gated Apple trust and permission prompts.
 
 ## QA controls
 

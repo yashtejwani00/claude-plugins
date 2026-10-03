@@ -1,6 +1,6 @@
 ---
 name: renit-release-preflight
-description: Produce a read-only Renit release-readiness report covering QA/Prod configuration, native dependencies, scoped changes, and QA evidence. Use when Codex needs to assess a Renit EAS, store, or production release without publishing anything.
+description: Produce a read-only Renit release-readiness report covering QA/Prod configuration, native dependencies, scoped changes, and QA evidence. Use when Claude needs to assess a Renit EAS, store, or production release without publishing anything.
 ---
 
 # Renit Release Preflight

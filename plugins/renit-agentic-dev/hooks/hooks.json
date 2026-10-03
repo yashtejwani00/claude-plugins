@@ -1,0 +1,11 @@
+{
+  "description": "Renit ticket pipeline: a bare Jira key starts the flow; a guard keeps the few human-only actions human.",
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/ticket-trigger.sh\"" }] }
+    ],
+    "PreToolUse": [
+      { "matcher": "Bash", "hooks": [{ "type": "command", "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/guard.sh\"" }] }
+    ]
+  }
+}
