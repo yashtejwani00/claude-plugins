@@ -109,7 +109,8 @@ the decision is `block`.
 
 1. Push the ticket branches.
 2. If rn-api changed: `scripts/qa-deploy.sh <KEY> <branch>`. It takes the QA
-   lock, deploys, and proves the container runs the new code. Exit 3 (another
+   lock, deploys `web` and `clocks` (the background jobs), and proves both
+   containers run the new code. Exit 3 (another
    ticket holds QA), 4 or 5 (deploying would lose someone's work) are for Yash;
    say which and stop the backend half there. Do not work around the lock or
    delete it; carry on with whatever the app side can prove without the new backend.

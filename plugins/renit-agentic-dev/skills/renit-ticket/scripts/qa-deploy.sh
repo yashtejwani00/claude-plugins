@@ -6,7 +6,7 @@
 # The branch must already be pushed. Exit codes:
 #   3 another ticket holds QA   4 server checkout has local edits
 #   5 QA is running commits this branch does not have
-#   6 container is not running the checkout, or web never came up
+#   6 web or clocks is not running the checkout, or web never came up
 # ponytail: one global lock, so tickets with backend changes test one at a time.
 # Move to a stack per ticket if they start queueing.
 set -euo pipefail
@@ -62,14 +62,17 @@ git checkout -q "$BRANCH" 2>/dev/null || git checkout -q -b "$BRANCH" "origin/$B
 git merge -q --ff-only "origin/$BRANCH"
 
 export APP_ENV_FILE=config/environments/qa.env
-docker compose --env-file "$APP_ENV_FILE" -f docker-compose.server.yml up -d --build web 2>&1 | tail -3
+docker compose --env-file "$APP_ENV_FILE" -f docker-compose.server.yml up -d --build web clocks 2>&1 | tail -3
 
 # A clean checkout is not proof of what the container runs: compare the code itself.
 sums() { xargs sha1sum | sha1sum | cut -d' ' -f1; }
 want=$(git ls-files 'src/*.py' | sort | sums)
 web=$(docker compose --env-file "$APP_ENV_FILE" -f docker-compose.server.yml ps -q web)
-got=$(git ls-files 'src/*.py' | sort | sed 's#^#/app/#' | docker exec -i "$web" sh -c 'xargs sha1sum' | sed 's#  /app/#  #' | sha1sum | cut -d' ' -f1)
-[ "$want" = "$got" ] || { echo "MISMATCH: the container is not running the checked-out code"; exit 6; }
+clocks=$(docker compose --env-file "$APP_ENV_FILE" -f docker-compose.server.yml ps -q clocks)
+for svc in web clocks; do
+  got=$(git ls-files 'src/*.py' | sort | sed 's#^#/app/#' | docker exec -i "${!svc}" sh -c 'xargs sha1sum' | sed 's#  /app/#  #' | sha1sum | cut -d' ' -f1) || true
+  [ "$want" = "$got" ] || { echo "MISMATCH: $svc is not running the checked-out code"; exit 6; }
+done
 
 # migrate runs in the container's start command; wait for the server to answer.
 for i in $(seq 1 30); do
@@ -79,5 +82,5 @@ done
 [ "${up:-0}" = 1 ] || { echo "DOWN: web did not answer in 2 minutes"; docker logs --tail 40 "$web"; exit 6; }
 
 [ "$RELEASE" = 1 ] && rm -f "$LOCK"
-echo "DEPLOYED $BRANCH @ $(git rev-parse --short HEAD); lock: $([ "$RELEASE" = 1 ] && echo released || echo "$KEY")"
+echo "DEPLOYED $BRANCH @ $(git rev-parse --short HEAD); started web $(docker inspect -f '{{.State.StartedAt}}' "$web"), clocks $(docker inspect -f '{{.State.StartedAt}}' "$clocks"); lock: $([ "$RELEASE" = 1 ] && echo released || echo "$KEY")"
 REMOTE
